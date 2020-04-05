@@ -1,6 +1,6 @@
 #
 # Created:  Sat 04 Apr 2020 12:16:00 PM PDT
-# Modified: Sat 04 Apr 2020 12:38:50 PM PDT
+# Modified: Sun 05 Apr 2020 02:32:31 PM PDT
 #
 # Copyright (c) 2020, Robert Gill
 # All rights reserved.
@@ -37,6 +37,13 @@ NSIS_HEADER = nsis/include/Select.nsh
 
 all:
 	$(MAKE) -C src
+
+example: example/example.exe
+
+example/example.exe: example/example.nsi
+	cd example && \
+		makensis /DPLUGIN_DIR="../nsis/plugins/x86-unicode" \
+		/DINCLUDE_DIR="../nsis/include" $(notdir $<)
 
 dist: clean
 	mkdir -p $(DISTDIR)

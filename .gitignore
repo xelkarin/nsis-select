@@ -1,12 +1,6 @@
 Select.dll
+example.exe
 *.def
 *.o
 /*.zip
-/README.aux
-/README.dvi
-/README.html
-/README.log
-/README.out
-/README.pdf
-/README.tex
 /src/.obj
