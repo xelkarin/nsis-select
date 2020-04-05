@@ -1,0 +1,12 @@
+Select.dll
+*.def
+*.o
+/*.zip
+/README.aux
+/README.dvi
+/README.html
+/README.log
+/README.out
+/README.pdf
+/README.tex
+/src/.obj
