@@ -1,6 +1,6 @@
 /*
  * Created:  Sat 04 Apr 2020 10:57:02 AM PDT
- * Modified: Sat 04 Apr 2020 11:03:58 PM PDT
+ * Modified: Sun 05 Apr 2020 01:03:16 AM PDT
  *
  * Copyright (c) 2020, Robert Gill
  * All rights reserved.
@@ -163,6 +163,36 @@ nsCreateSelectDialog (HWND hwndParent, int string_size, LPTSTR variables,
     }
 
   pushint (1);
+}
+
+void DLLEXPORT
+nsSelectDialogSetTitle (HWND hwndParent, int string_size, LPTSTR variables,
+                        stack_t **stacktop, extra_parameters *extra)
+{
+  LPTSTR title;
+
+  EXDLL_INIT ();
+  if (g_hWnd == NULL)
+    {
+      pusherrmsg (_T ("Dialog has not been created"), 0);
+      pushint (0);
+      return;
+    }
+
+  title = GlobalAlloc (GPTR, BUF_SIZE);
+  popstring (title);
+
+  if (!SetWindowText (g_hWnd, title))
+    {
+      pusherrmsg (_T ("Unable to set window title"), GetLastError ());
+      pushint (0);
+      goto cleanup;
+    }
+
+  pushint (1);
+
+cleanup:
+  GlobalFree (title);
 }
 
 void DLLEXPORT

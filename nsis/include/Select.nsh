@@ -41,6 +41,18 @@ Pop ${_ERR}
 !define CreateSelectDialog "!insertmacro _CreateSelectDialog"
 
 ;;
+; SelectDialogSetTitle TITLE RET ERR
+!macro _SelectDialogSetTitle _TITLE _RET _ERR
+StrCpy ${_ERR} ""
+Push "${_TITLE}"
+Select::nsSelectDialogSetTitle
+Pop ${_RET}
+StrCmp ${_RET} "1" +2
+Pop ${_ERR}
+!macroend
+!define SelectDialogSetTitle "!insertmacro _SelectDialogSetTitle"
+
+;;
 ; SelectDialogAddItem ITEM RET ERR
 !macro _SelectDialogAddItem _ITEM _RET _ERR
 StrCpy ${_ERR} ""
