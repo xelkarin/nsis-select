@@ -1,6 +1,6 @@
 ;
 ; Created:  Sat 04 Apr 2020 12:31:06 PM PDT
-; Modified: Sat 04 Apr 2020 10:55:39 PM PDT
+; Modified: Sun 05 Apr 2020 02:03:49 PM PDT
 ;
 ; Copyright (c) 2020, Robert Gill
 ; All rights reserved.
@@ -51,6 +51,18 @@ StrCmp ${_RET} "1" +2
 Pop ${_ERR}
 !macroend
 !define SelectDialogSetTitle "!insertmacro _SelectDialogSetTitle"
+
+;;
+; SelectDialogSetText TEXT RET ERR
+!macro _SelectDialogSetText _TEXT _RET _ERR
+StrCpy ${_ERR} ""
+Push "${_TEXT}"
+Select::nsSelectDialogSetText
+Pop ${_RET}
+StrCmp ${_RET} "1" +2
+Pop ${_ERR}
+!macroend
+!define SelectDialogSetText "!insertmacro _SelectDialogSetText"
 
 ;;
 ; SelectDialogAddItem ITEM RET ERR

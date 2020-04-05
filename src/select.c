@@ -1,6 +1,6 @@
 /*
  * Created:  Sat 04 Apr 2020 10:57:02 AM PDT
- * Modified: Sun 05 Apr 2020 01:03:16 AM PDT
+ * Modified: Sun 05 Apr 2020 02:00:08 PM PDT
  *
  * Copyright (c) 2020, Robert Gill
  * All rights reserved.
@@ -140,7 +140,6 @@ nsCreateSelectDialog (HWND hwndParent, int string_size, LPTSTR variables,
                       stack_t **stacktop, extra_parameters *extra)
 {
   EXDLL_INIT ();
-
   if (g_hWnd != NULL)
     {
       pusherrmsg (_T ("Dialog already created"), 0);
@@ -196,6 +195,45 @@ cleanup:
 }
 
 void DLLEXPORT
+nsSelectDialogSetText (HWND hwndParent, int string_size, LPTSTR variables,
+                       stack_t **stacktop, extra_parameters *extra)
+{
+  LPTSTR text;
+  HWND hText;
+
+  EXDLL_INIT ();
+  if (g_hWnd == NULL)
+    {
+      pusherrmsg (_T ("Dialog has not been created"), 0);
+      pushint (0);
+      return;
+    }
+
+  hText = GetDlgItem (g_hWnd, IDC_TEXT);
+  if (hText == NULL)
+    {
+      pusherrmsg (_T ("Unable to find text control"), 0);
+      pushint (0);
+      return;
+    }
+
+  text = GlobalAlloc (GPTR, BUF_SIZE);
+  popstring (text);
+
+  if (!SetWindowText (hText, text))
+    {
+      pusherrmsg (_T ("Unable to set window text"), GetLastError ());
+      pushint (0);
+      goto cleanup;
+    }
+
+  pushint (1);
+
+cleanup:
+  GlobalFree (text);
+}
+
+void DLLEXPORT
 nsSelectDialogAddItem (HWND hwndParent, int string_size, LPTSTR variables,
                        stack_t **stacktop, extra_parameters *extra)
 {
@@ -214,7 +252,7 @@ nsSelectDialogAddItem (HWND hwndParent, int string_size, LPTSTR variables,
   hCombo = GetDlgItem (g_hWnd, IDC_COMBO);
   if (hCombo == NULL)
     {
-      pusherrmsg (_T ("Unable to find combo box"), GetLastError ());
+      pusherrmsg (_T ("Unable to find combo box control"), GetLastError ());
       pushint (0);
       return;
     }
