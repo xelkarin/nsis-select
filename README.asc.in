@@ -1,0 +1,68 @@
+= NSIS Select Pop-Up Dialog
+Robert Gill <locke@sdf.org>
+
+The *NSIS Select* plugin provides a simple modal pop-up dialog from which the
+user may select from a list of items. It's far simpler to use than the
+`nsDialog` plugin and doesn't require creating an entire custom installer page
+when all you need is a simple combo box.
+
+
+== Requirements
+
+The UNICODE plugin requires at least NSIS 3.0. The ASCII plugin should work
+with NSIS 2.xx. I haven't tested (much) at all with NSIS 2.xx, so if there are
+issues using the plugin with that version, let me know.
+
+
+== API Documentation
+
+@API_DOCUMENTATION@
+
+
+== Build Requirements
+
+The following are the requirements for building with GCC:
+
+* http://www.cygwin.com[Cygwin]
+* `mingw64-i686-gcc-core` (Cygwin package)
+* `make` (Cygwin package)
+* `unzip` or `p7zip` (Cygwin package; optional; for unpacking distribution)
+* `p7zip` (Cygwin package; optional; for creating distribution packages (``make dist``))
+
+
+== Cygwin Build Instructions
+
+Install https://www.cygwin.com[Cygwin] including the `mingw64-i686-gcc-core`
+compiler package, which should pull in `mingw64-i686-runtime`.
+
+Then building should be as simple as running:
+
+  make
+
+
+== LICENSE
+
+[%hardbreaks]
+Copyright (c) 2020, Robert Gill
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice,
+   this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.

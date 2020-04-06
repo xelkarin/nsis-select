@@ -1,6 +1,6 @@
 #
 # Created:  Sat 04 Apr 2020 12:16:00 PM PDT
-# Modified: Sun 05 Apr 2020 02:32:31 PM PDT
+# Modified: Sun 05 Apr 2020 05:11:51 PM PDT
 #
 # Copyright (c) 2020, Robert Gill
 # All rights reserved.
@@ -35,8 +35,18 @@ BINDISTFILE = $(PACKAGE)-$(PACKAGE_VERSION)-bin.zip
 DISTDIR = ./$(PACKAGE)-$(PACKAGE_VERSION)
 NSIS_HEADER = nsis/include/Select.nsh
 
-all:
+all: readme
 	$(MAKE) -C src
+
+readme: README.asc
+
+README.asc: $(NSIS_HEADER) README.asc.in
+	awk '/^;;/{f=1;next}/^[^;]/{f=0}f {print substr($$0,3)}' < $< | \
+		awk '/@API_DOCUMENTATION@/{ \
+			while(getline line < "-"){ \
+				print line \
+			} next \
+		} //' $(word 2,$^) > $@
 
 example: example/example.exe
 

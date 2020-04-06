@@ -1,6 +1,6 @@
 ;
 ; Created:  Sat 04 Apr 2020 12:31:06 PM PDT
-; Modified: Sun 05 Apr 2020 02:03:49 PM PDT
+; Modified: Sun 05 Apr 2020 06:42:06 PM PDT
 ;
 ; Copyright (c) 2020, Robert Gill
 ; All rights reserved.
@@ -30,7 +30,19 @@
 !define __SELECT_NSH__
 
 ;;
-; CreateSelectDialog
+; === CreateSelectDialog
+;
+;  Usage: ${CreateSelectDialog} RET ERR
+;
+; Creates a `SelectDialog`, which then may be updated with additional function
+; calls (add items, set text, etc.). This function must be called before any of
+; the following functions. The `SelectDialog` may then be shown by calling the
+; `ShowSelectDialog` function.
+;
+; A return code is returned in the variable specified by `RET`. It will contain
+; `"0"` if an error has occured, or `"1"` on success. The variable specified by
+; `ERR` will contain the error message when an error occurs.
+;
 !macro _CreateSelectDialog _RET _ERR
 StrCpy ${_ERR} ""
 Select::nsCreateSelectDialog
@@ -41,7 +53,16 @@ Pop ${_ERR}
 !define CreateSelectDialog "!insertmacro _CreateSelectDialog"
 
 ;;
-; SelectDialogSetTitle TITLE RET ERR
+; === SelectDialogSetTitle
+;
+;  Usage: ${SelectDialogSetTitle} TITLE RET ERR
+;
+; Set the ``SelectDialog``'s title to `TITLE`.
+;
+; A return code is returned in the variable specified by `RET`. It will contain
+; `"0"` if an error has occured, or `"1"` on success. The variable specified by
+; `ERR` will contain the error message when an error occurs.
+;
 !macro _SelectDialogSetTitle _TITLE _RET _ERR
 StrCpy ${_ERR} ""
 Push "${_TITLE}"
@@ -53,7 +74,17 @@ Pop ${_ERR}
 !define SelectDialogSetTitle "!insertmacro _SelectDialogSetTitle"
 
 ;;
-; SelectDialogSetText TEXT RET ERR
+; === SelectDialogSetText
+;
+;  Usage: ${SelectDialogSetText} TEXT RET ERR
+;
+; Set the ``SelectDialog``'s message text (displayed just above the selection
+; combo box) to `TEXT`.
+;
+; A return code is returned in the variable specified by `RET`. It will contain
+; `"0"` if an error has occured, or `"1"` on success. The variable specified by
+; `ERR` will contain the error message when an error occurs.
+;
 !macro _SelectDialogSetText _TEXT _RET _ERR
 StrCpy ${_ERR} ""
 Push "${_TEXT}"
@@ -65,7 +96,18 @@ Pop ${_ERR}
 !define SelectDialogSetText "!insertmacro _SelectDialogSetText"
 
 ;;
-; SelectDialogAddItem ITEM RET ERR
+; === SelectDialogAddItem
+;
+;  Usage: ${SelectDialogAddItem} ITEM RET ERR
+;
+; Add `ITEM` to the ``SelectDialog``'s combo box. Call `SelectDialogAddItem`
+; multiple times to add multiple items. Items added will appear in the
+; ``SelectDialog``'s combo box list in the order they are added.
+;
+; A return code is returned in the variable specified by `RET`. It will contain
+; `"0"` if an error has occured, or `"1"` on success. The variable specified by
+; `ERR` will contain the error message when an error occurs.
+;
 !macro _SelectDialogAddItem _ITEM _RET _ERR
 StrCpy ${_ERR} ""
 Push "${_ITEM}"
@@ -77,7 +119,17 @@ Pop ${_ERR}
 !define SelectDialogAddItem "!insertmacro _SelectDialogAddItem"
 
 ;;
-; SelectDialogSetSelection ITEM RET ERR
+; === SelectDialogSetSelection
+;
+;  Usage: ${SelectDialogSetSelection} ITEM RET ERR
+;
+; Set the ``SelectDialog``'s current selection to `ITEM`. `ITEM` must have
+; already been added to the `SelectDialog` via `SelectDialogAddItem`.
+;
+; A return code is returned in the variable specified by `RET`. It will contain
+; `"0"` if an error has occured, or `"1"` on success. The variable specified by
+; `ERR` will contain the error message when an error occurs.
+;
 !macro _SelectDialogSetSelection _ITEM _RET _ERR
 StrCpy ${_ERR} ""
 Push "${_ITEM}"
@@ -89,7 +141,18 @@ Pop ${_ERR}
 !define SelectDialogSetSelection "!insertmacro _SelectDialogSetSelection"
 
 ;;
-; ShowSelectDialog RET RESULT
+; === ShowSelectDialog
+;
+;  Usage: ${ShowSelectDialog} RET RESULT
+;
+; Show the `SelectDialog`. On success the selected item will be return in the
+; variable specified by `RESULT`. The `SelectDialog` is destroyed upon
+; completion of this function.
+;
+; A return code is returned in the variable specified by `RET`. It will contain
+; `"0"` if an error has occured, or `"1"` on success. The variable specified by
+; `RESULT` will contain the error message when an error occurs.
+;
 !macro _ShowSelectDialog _RET _RESULT
 StrCpy ${_RESULT} ""
 Select::nsShowSelectDialog
@@ -99,7 +162,17 @@ Pop ${_RESULT}
 !define ShowSelectDialog "!insertmacro _ShowSelectDialog"
 
 ;;
-; DestroySelectDialog RET
+; === DestroySelectDialog
+;
+;  Usage: ${DestroySelectDialog} RET ERR
+;
+; Destroy the `SelectDialog` freeing up resources allocated. This should be
+; used if for some reason `ShowSelectDialog` is never called.
+;
+; A return code is returned in the variable specified by `RET`. It will contain
+; `"0"` if an error has occured, or `"1"` on success. The variable specified by
+; `ERR` will contain the error message when an error occurs.
+;
 !macro _DestroySelectDialog _RET _ERR
 StrCpy ${_ERR} ""
 Select::nsDestroySelectDialog
