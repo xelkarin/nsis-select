@@ -1,6 +1,6 @@
 #
 # Created:  Sat 04 Apr 2020 12:16:00 PM PDT
-# Modified: Sun 05 Apr 2020 10:51:35 PM PDT
+# Modified: Sun 05 Apr 2020 11:10:53 PM PDT
 #
 # Copyright (c) 2020, Robert Gill
 # All rights reserved.
@@ -35,10 +35,8 @@ BINDISTFILE = $(PACKAGE)-$(PACKAGE_VERSION)-bin.zip
 DISTDIR = ./$(PACKAGE)-$(PACKAGE_VERSION)
 NSIS_HEADER = nsis/include/Select.nsh
 
-all: readme
+all: README.asc
 	$(MAKE) -C src
-
-readme: README.asc
 
 README.asc: $(NSIS_HEADER) README.asc.in
 	awk '/^;;/{f=1;next}/^[^;]/{f=0}f {print substr($$0,3)}' < $< | \
@@ -96,4 +94,4 @@ clean:
 	-rm -f $(DISTFILE)
 	-rm -f $(BINDISTFILE)
 
-.PHONY: all clean dist bin-dist
+.PHONY: all example dist bin-dist clean
