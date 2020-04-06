@@ -1,6 +1,6 @@
 #
 # Created:  Sat 04 Apr 2020 12:16:00 PM PDT
-# Modified: Sun 05 Apr 2020 05:11:51 PM PDT
+# Modified: Sun 05 Apr 2020 10:51:35 PM PDT
 #
 # Copyright (c) 2020, Robert Gill
 # All rights reserved.
@@ -81,6 +81,7 @@ bin-dist: clean all
 		-type d -exec mkdir $(DISTDIR)/{} \;
 	find . -not -name '.' \
 		-not -name 'Makefile' \
+		-not -name 'README.asc.in' \
 		-not -name '.keep' \
 		-not -wholename './.git*' \
 		-not -wholename './src/*' \
