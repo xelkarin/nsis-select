@@ -1,6 +1,6 @@
 ;
 ; Created:  Sat 04 Apr 2020 12:31:06 PM PDT
-; Modified: Mon 06 Apr 2020 01:07:45 AM PDT
+; Modified: Mon 06 Apr 2020 08:28:42 PM PDT
 ;
 ; Copyright (c) 2020, Robert Gill
 ; All rights reserved.
@@ -152,7 +152,8 @@ Pop ${_ERR}
 ;
 ; A return code is returned in the variable specified by `RET`. It will contain
 ; `0` if an error has occured, or `1` on success. The variable specified by
-; `RESULT` will contain the error message when an error occurs.
+; `RESULT` will contain the selected item, or an error message if an error
+; occurs.
 ;
 !macro _ShowSelectDialog _RET _RESULT
 StrCpy ${_RESULT} ""
