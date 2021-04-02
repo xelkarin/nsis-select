@@ -1,5 +1,5 @@
 = NSIS Select Pop-Up Dialog
-Robert Gill <locke@sdf.org>
+Robert Gill <rtgill82@gmail.com>
 
 The *NSIS Select* plugin provides a simple modal pop-up dialog from which the
 user may select from a list of items. It's far simpler to use than the
